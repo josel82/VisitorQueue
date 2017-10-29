@@ -63,4 +63,11 @@ public class VisitorQueue {
 	public int getPosition(Person p){
 		return list.indexOf(p);
 	}
+	public void updatePerson(int pos, String fn, String ln, String ad, String ps){
+		list.get(pos).setFirstname(fn);
+		list.get(pos).setLastname(ln);
+		list.get(pos).setArrivalDate(ad);
+		list.get(pos).setPassport(ps);
+		
+	}
 }

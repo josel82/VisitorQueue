@@ -25,7 +25,8 @@ public class Menu {
 		System.out.print("4 -Remove person from the top of the queue. | ");
 		System.out.print("\n5 -Remove person by id. | ");
 		System.out.print("6 -Search by id. | ");
-		System.out.print("7 -Print queue. | ");
+		System.out.print("7 -Update visitor. | ");
+		System.out.print("8 -Print queue. | ");
 		System.out.print("0 -Exit.\n");
 	}
 	
@@ -36,7 +37,7 @@ public class Menu {
 		Scanner kb = new Scanner(System.in);
 		int option = -1;
 		
-		while(option < 0 || option > 7){
+		while(option < 0 || option > 8){
 			try{
 				System.out.print("\nEnter option: ");
 				option = Integer.parseInt(kb.nextLine());

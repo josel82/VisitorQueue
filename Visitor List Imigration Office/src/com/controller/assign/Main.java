@@ -111,6 +111,27 @@ public class Main {
 				}
 				break;
 			case 7:
+				id = menu.insertId();
+				if(id<1){
+					System.out.println("Invalid id");
+				}else{
+					boolean found = false;
+					for(Person p: queue.getQueue()){
+						if(p.getId() == id){
+							int pos = queue.getPosition(p);
+							details = menu.onAdd();
+							queue.updatePerson(pos, details[0], details[1], details[2], details[3]);
+							System.out.println("\nThis visitor has been successfully updated:");
+							menu.printPerson(p, pos+1);
+							found = true;
+						}
+					}
+					if(!found){
+						System.out.println("\nNo visitor with id: "+id+" has been found.");
+					}
+				}
+				break;
+			case 8:
 				
 				if(queue.length()==0){
 					System.out.println("\nThe queue is empty.");
