@@ -24,9 +24,10 @@ public class Menu {
 		System.out.print("\n3 -Add a new person with priority. | ");
 		System.out.print("4 -Remove person from the top of the queue. | ");
 		System.out.print("\n5 -Remove person by id. | ");
-		System.out.print("6 -Search by id. | ");
-		System.out.print("7 -Update visitor. | ");
-		System.out.print("8 -Print queue. | ");
+		System.out.print("6 -Remove last N visitors. | ");
+		System.out.print("7 -Search by id. | ");
+		System.out.print("8 -Update visitor. | ");
+		System.out.print("\n9 -Print queue. | ");
 		System.out.print("0 -Exit.\n");
 	}
 	
@@ -37,7 +38,7 @@ public class Menu {
 		Scanner kb = new Scanner(System.in);
 		int option = -1;
 		
-		while(option < 0 || option > 8){
+		while(option < 0 || option > 9){
 			try{
 				System.out.print("\nEnter option: ");
 				option = Integer.parseInt(kb.nextLine());
@@ -123,7 +124,22 @@ public class Menu {
 		}
 		return id;
 	}
+
+//*********************************************************************************
+//  Prompts user for the number of visitors to be removed
 	
+	public int onRemoveNLast(){
+		int n = 0;
+		Scanner kb = new Scanner(System.in);
+		System.out.println("\nPlease insert the number of visitors to be deleted.");
+		try{
+			System.out.print("No:");
+			 n = Integer.parseInt(kb.nextLine());
+		}catch(NumberFormatException e){
+			System.out.println("Invalid input");
+		}
+		return n;
+	}
 
 //*********************************************************************************
 //  Prints full visitor's information

@@ -49,6 +49,17 @@ public class VisitorQueue {
 		return list.remove(index);
 	}
 	
+	public boolean removeNLast(int n){
+		boolean allowed =false;
+		if(list.size()>n){
+			for(int i=0; i<n; i++){
+				list.removeLast();
+			}
+			allowed = true;
+		}
+		return allowed;
+	}
+	
 	public int length(){
 		return list.size();
 	}
@@ -68,6 +79,5 @@ public class VisitorQueue {
 		list.get(pos).setLastname(ln);
 		list.get(pos).setArrivalDate(ad);
 		list.get(pos).setPassport(ps);
-		
 	}
 }

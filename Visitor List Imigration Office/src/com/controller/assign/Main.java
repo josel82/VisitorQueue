@@ -98,7 +98,20 @@ public class Main {
 					}
 				}
 				break;
-			case 6:	
+			case 6:
+				int n = menu.onRemoveNLast();
+				if(n<0){
+					System.out.println("\nInvalid input");
+				}else{
+					boolean r = queue.removeNLast(n);
+					if(r){
+						System.out.println("\nThe last "+n+" visitors have been successfully removed.");
+					}else{
+						System.out.println("\nUnable to remove the last "+n+" visitors.");
+					}
+				}
+				break;
+			case 7:	
 				id = menu.insertId();
 				if(id<1){
 					System.out.println("Invalid id");
@@ -110,7 +123,7 @@ public class Main {
 					}
 				}
 				break;
-			case 7:
+			case 8:
 				id = menu.insertId();
 				if(id<1){
 					System.out.println("Invalid id");
@@ -131,7 +144,7 @@ public class Main {
 					}
 				}
 				break;
-			case 8:
+			case 9:
 				
 				if(queue.length()==0){
 					System.out.println("\nThe queue is empty.");
