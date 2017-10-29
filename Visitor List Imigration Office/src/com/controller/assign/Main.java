@@ -1,5 +1,7 @@
 package com.controller.assign;
 
+import java.util.NoSuchElementException;
+
 import com.models.assign.Person;
 import com.models.assign.VisitorQueue;
 import com.views.assign.Menu;
@@ -65,20 +67,34 @@ public class Main {
 				}			
 				break;
 			case 4:
-				Person rp = queue.removeFirst();
-				System.out.println("Visitor with id: "+rp.getId()+" has been cleared from que queue");
+				try{
+					Person rp = queue.removeFirst();
+					System.out.println("Visitor with id: "+rp.getId()+" has been cleared from que queue");
+				}catch(NoSuchElementException e){
+					System.out.println("\nThe queue is empty. Nothing to remove.");
+				}
+				
 				break;
 			case 5:	
 				id = menu.insertId();
 				if(id<1){
 					System.out.println("Invalid id");
 				}else{
+					boolean found = false;
 					for(Person p: queue.getQueue()){
 						if(p.getId() == id){
-							queue.remove(queue.getPosition(p));
-							System.out.println("Visitor with id: "+p.getId()+" has been cleared from que queue");
+							try{
+								queue.remove(queue.getPosition(p));
+								System.out.println("\nVisitor with id: "+p.getId()+" has been cleared from que queue");
+								found = true;
+							}catch(IndexOutOfBoundsException e){
+								System.out.println("\nInvalid id. Please try again.");
+							}
 							break;
 						}
+					}
+					if(!found){
+						System.out.println("\nNo visitor with id: "+id+" has been found.");
 					}
 				}
 				break;

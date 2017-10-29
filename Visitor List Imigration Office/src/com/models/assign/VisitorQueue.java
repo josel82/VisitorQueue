@@ -2,6 +2,7 @@ package com.models.assign;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class VisitorQueue {
 
@@ -40,11 +41,11 @@ public class VisitorQueue {
 	}
 	
 	//Once someone has been served it needs to be cleared from the queue
-	public Person removeFirst(){ 
+	public Person removeFirst() throws NoSuchElementException{ 
 		return list.removeFirst();
 	}
 	
-	public Person remove(int index){
+	public Person remove(int index) throws IndexOutOfBoundsException{
 		return list.remove(index);
 	}
 	
