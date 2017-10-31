@@ -1,20 +1,18 @@
 package com.models.assign;
 
+import java.util.Date;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class VisitorQueue {
 
 	private final LinkedList<Person> list = new LinkedList<Person>(); //This is where we hold person objects
 	
-	private final ListIterator<Person> listIterator = list.listIterator();
-	
 	private int id = 1;
 	
 	
 	//************Methods****************
-	public Person createPerson(String firstname, String lastname, String arrival, String passport){
+	public Person createPerson(String firstname, String lastname, Date arrival, String passport){
 		
 		Person person = new Person(id, firstname, lastname, arrival, passport);
 		id++;
@@ -74,7 +72,7 @@ public class VisitorQueue {
 	public int getPosition(Person p){
 		return list.indexOf(p);
 	}
-	public void updatePerson(int pos, String fn, String ln, String ad, String ps){
+	public void updatePerson(int pos, String fn, String ln, Date ad, String ps){
 		list.get(pos).setFirstname(fn);
 		list.get(pos).setLastname(ln);
 		list.get(pos).setArrivalDate(ad);

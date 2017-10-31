@@ -1,16 +1,16 @@
 package com.models.assign;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Person {
 	
 	private int id;
 	private String firstname;
 	private String lastname;
-	private String arrivalDate;
+	private Date arrivalDate;
 	private String passport;
 	
-	public Person(int id, String firstname, String lastname, String arrivalDate, String passport){
+	public Person(int id, String firstname, String lastname, Date arrivalDate, String passport){
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -34,11 +34,11 @@ public class Person {
 		this.lastname = lastname;
 	}
 
-	public String getArrivalDate() {
+	public Date getArrivalDate() {
 		return arrivalDate;
 	}
 
-	public void setArrivalDate(String arrivalDate) {
+	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
 
