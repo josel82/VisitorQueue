@@ -29,7 +29,6 @@ public class Main {
 		
 		while(!exit){
 			
-			String[] details;
 			Person np;
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
 			Date date = null;

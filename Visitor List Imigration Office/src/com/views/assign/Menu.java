@@ -65,6 +65,7 @@ public class Menu {
 	// Prompts user for information.
 	public String getInput(String prompt){
 		String input = "";
+		@SuppressWarnings("resource")
 		Scanner kb = new Scanner(System.in);
 		try{
 			System.out.print("\n"+prompt);
@@ -81,6 +82,7 @@ public class Menu {
 
 	public int onRemoveNLast() {
 		int n = 0;
+		@SuppressWarnings("resource")
 		Scanner kb = new Scanner(System.in);
 		System.out.println("\nPlease insert the number of visitors to be deleted.");
 		try {
