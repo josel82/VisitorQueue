@@ -8,6 +8,7 @@ import com.models.assign.Person;
 public class Menu {
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
+	//Instance of the SimpleDateFormat class. Used for giving format to the Date data type.
 
 	// *********************************************************************************
 	// Prints a welcome message when the program starts.
