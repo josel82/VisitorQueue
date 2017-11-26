@@ -94,7 +94,7 @@ public class Main {
 				try{// In case user inputs a position that is out of bounds
 					np = queue.addPriority(Integer.parseInt(pos)-1,queue.createPerson(fn, ln, date, ps)); //creates a person and adds it to a specified position in the queue
 					menu.printMsg("New person added with id: "+np.getId()+" has bee added to position: "+pos);
-				}catch(IndexOutOfBoundsException e){
+				}catch(IllegalStateException e){
 					menu.printMsg("Invalid position. Please try again.");
 				}		
 			
@@ -121,22 +121,13 @@ public class Main {
 				if(id<1){
 					menu.printMsg("Invalid id");
 				}else{
-					boolean found = false;
-					for(Person p: queue.getQueue()){ //Iterates over the queue
-						if(p.getId() == id){ //finds the user
-							try{
-								queue.remove(queue.getPosition(p));
-								menu.printMsg("Visitor with id: "+p.getId()+" has been removed from que queue");
-								found = true; // tells the program that teh visitor has been found
-							}catch(IndexOutOfBoundsException e){
-								menu.printMsg("Invalid id. Please try again.");
-							}
-							break;
-						}
+					try{
+						Person rp = queue.removeByID(id);
+						menu.printMsg("Visitor with id: "+rp.getId()+" has been removed from que queue");
+					}catch(IllegalStateException e){
+						menu.printMsg(e.getMessage());
 					}
-					if(!found){
-						menu.printMsg("No visitor with id: "+id+" has been found."); //in case it couldn't find a visitor with that id
-					}
+					
 				}
 				break;
 			}
@@ -145,12 +136,15 @@ public class Main {
 				if(n<1){ // deleting zero or less visitors doesn't make sense.
 					menu.printMsg("Invalid input");
 				}else{
-					boolean r = queue.removeNLast(n); //removes visitors
-					if(r){
+					
+					try{
+						queue.removeNLast(n); //removes visitors
 						menu.printMsg("The last "+n+" visitors have been successfully removed.");
-					}else{
-						menu.printMsg("The number inserted is larger than the number of visitor in the queue.");
+					}catch(IllegalStateException e){
+						menu.printMsg(e.getMessage());
 					}
+					
+				
 				}
 				break;
 			case 7:	{// Search by id
@@ -164,16 +158,13 @@ public class Main {
 				if(id<1){
 					menu.printMsg("Invalid id");
 				}else{
-					boolean found = false;
-					for(Person p: queue.getQueue()){ //Iterates over the queue
-						if(p.getId() == id){ //finds visitor's id
-							menu.printPerson(p, queue.getPosition(p)+1);
-							found = true;
-						}
+					try{
+						Person p = queue.getPersonByID(id);
+						menu.printPerson(p, queue.getPosition(p));
+					}catch(IllegalStateException e){
+						menu.printMsg(e.getMessage());
 					}
-					if(!found){
-						menu.printMsg("No visitor with id: "+id+" was found."); //in case it couldn't find a visitor with that id
-					}
+					
 				}
 				break;
 			}
@@ -188,30 +179,29 @@ public class Main {
 				if(id<1){
 					menu.printMsg("Invalid id");
 				}else{
-					boolean found = false;
-					for(Person p: queue.getQueue()){ //Iterates over the queue
-						if(p.getId() == id){ //finds visitor with that id
-							int pos = queue.getPosition(p); //gets that visitor's position in the queue
-							//gets new info from user
-							String fn = menu.getInput("First Name:");
-							String ln = menu.getInput("Last Name:");
-							while(date == null){
-								try {
-									date = dateFormat.parse(menu.getInput("Arrival Date:"));
-								} catch (ParseException e1) {
-									menu.printMsg("Invalid Date.");
-								}
+					
+					try{
+						Person p = queue.getPersonByID(id);
+						int pos = queue.getPosition(p); //gets that visitor's position in the queue
+						//gets new info from user
+						String fn = menu.getInput("First Name:");
+						String ln = menu.getInput("Last Name:");
+						while(date == null){
+							try {
+								date = dateFormat.parse(menu.getInput("Arrival Date:"));
+							} catch (ParseException e1) {
+								menu.printMsg("Invalid Date.");
 							}
-							String ps = menu.getInput("Passport:");
-							queue.updatePerson(pos, fn, ln, date, ps); // updates visitor object with the new info
-							menu.printMsg("This visitor has been successfully updated:");
-							menu.printPerson(p, pos+1);
-							found = true;
 						}
-					}
-					if(!found){
-						menu.printMsg("No visitor with id: "+id+" has been found.");//case it couldn't find a visitor with that id
-					}
+						String ps = menu.getInput("Passport:");
+						queue.updatePerson(pos, fn, ln, date, ps); // updates visitor object with the new info
+						menu.printMsg("This visitor has been successfully updated:");
+						menu.printPerson(p, pos);
+						
+					}catch(IllegalStateException e){
+						menu.printMsg(e.getMessage());
+					}	
+					
 				}
 				break;
 			}
@@ -221,8 +211,8 @@ public class Main {
 					menu.printMsg("The queue is empty.");
 				}else{
 					menu.printMsg("------------Queue-------------");
-					for(int i=0; i<queue.length(); i++){ //Iterates over the queue
-						menu.printPersonBrief(i+1, queue.getPerson(i)); //retrieves and print visitors information
+					for(int i=1; i<=queue.length(); i++){ //Iterates over the queue
+						menu.printPersonBrief(i, queue.getPersonByPos(i)); //retrieves and print visitors information
 					}
 					menu.printMsg("------------------------------");
 				}
